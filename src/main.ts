@@ -2,6 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ConfigService } from '@nestjs/config';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { BadRequestException, ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -22,6 +23,14 @@ async function bootstrap() {
   
   app.enableCors();
   app.setGlobalPrefix(prefix)
+  app.useGlobalPipes(new ValidationPipe({
+    exceptionFactory: (errors) => {
+      const firstError = errors[0];
+      const firstConstraintKey = Object.keys(firstError.constraints || {})[0];
+      const firstErrorMessage = firstError.constraints?.[firstConstraintKey];
+      return new BadRequestException(firstErrorMessage || 'Validation failed');
+    }
+  }))
   await app.listen(port);
 }
 bootstrap();
