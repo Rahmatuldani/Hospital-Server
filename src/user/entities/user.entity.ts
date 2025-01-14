@@ -1,6 +1,7 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { Exclude } from "class-transformer";
 import mongoose, { HydratedDocument } from "mongoose";
+import { UserGender, UserRole } from "src/config/types";
 
 export type UserDocument = HydratedDocument<User>
 
@@ -31,11 +32,11 @@ export class User {
     @Prop({required: true})
     birthPlace: string;
 
-    @Prop({required: true})
-    gender: string;
+    @Prop({required: true, enum: UserGender})
+    gender: UserGender;
 
-    @Prop({required: true})
-    role: string;
+    @Prop({required: true, enum: UserRole})
+    role: UserRole;
 
     @Prop({default: null})
     deletedAt: Date | null;
