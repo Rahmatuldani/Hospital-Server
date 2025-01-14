@@ -15,7 +15,7 @@ export class UserService {
 
   async create(createUserDto: CreateUserDto) {
     const np: string = this.libService.generateNp(createUserDto.birthDate)
-    const password: string = this.libService.encryption(np)
+    const password: string = this.libService.hash(np)
     createUserDto['np'] = np;
     createUserDto['password'] = password
 
