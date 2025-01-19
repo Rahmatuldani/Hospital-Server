@@ -47,6 +47,7 @@ export class LibService {
     decryption(data: string) {
         const [ivHex, encryptedHex] = data.split(":")
         const iv = Buffer.from(ivHex, 'hex');
+        
         if (iv.length !== 16) {
             throw new BadRequestException("invalid data")
         }
