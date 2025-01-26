@@ -17,7 +17,13 @@ async function bootstrap() {
   .setDescription("Hospital API server endpoint")
   .setVersion("1.0")
   .addServer(`${baseUrl}/${prefix}`, "Development Server")
+  .addBearerAuth({
+    type: 'http',
+    scheme: 'bearer',
+    bearerFormat: 'JWT'
+  })
   .build()
+
   const documentFactory =  SwaggerModule.createDocument(app, swaggerConfig);
   SwaggerModule.setup("docs", app, documentFactory)
   
