@@ -2,10 +2,14 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { PatientService } from './patient.service';
 import { CreatePatientDto } from './dto/create-patient.dto';
 import { UpdatePatientDto } from './dto/update-patient.dto';
+import { PatientGateway } from './patient.gateway';
 
 @Controller('patient')
 export class PatientController {
-  constructor(private readonly patientService: PatientService) {}
+  constructor(
+    private readonly patientService: PatientService,
+    private readonly patientGateway: PatientGateway
+  ) {}
 
   @Post()
   create(@Body() createPatientDto: CreatePatientDto) {
@@ -14,6 +18,7 @@ export class PatientController {
 
   @Get()
   findAll() {
+    this.patientGateway.handleUpdatePatientData()
     return this.patientService.findAll();
   }
 
