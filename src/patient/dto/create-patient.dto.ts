@@ -1,8 +1,15 @@
-import { ApiProperty } from "@nestjs/swagger";
-import { IsDateString, IsEnum, IsNotEmpty, IsOptional, IsString } from "class-validator";
-import { BloodType, PaymentMethod, UserGender } from "src/config/types";
+import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
+import { IsDateString, IsEnum, IsNotEmpty, IsNumberString, IsOptional, IsString } from "class-validator";
+import { BloodType, PaymentMethod, Religion, UserGender } from "src/config/types";
 
 export class CreatePatientDto {
+    @ApiProperty({
+        example: "",
+    })
+    @IsNumberString()
+    @IsNotEmpty()
+    nik: string;
+    
     @ApiProperty({
         example: ""
     })
@@ -61,4 +68,49 @@ export class CreatePatientDto {
     @IsString()
     @IsNotEmpty()
     job: string
+    
+    @ApiPropertyOptional({
+        example: null,
+        type: String,
+        nullable: true
+    })
+    @IsOptional()
+    @IsNumberString()
+    bpjs: string
+    
+    @ApiProperty({
+        example: ""
+    })
+    @IsString()
+    @IsNotEmpty()
+    partner: string
+    
+    @ApiProperty({
+        example: ""
+    })
+    @IsNumberString()
+    @IsNotEmpty()
+    patientPhone: string
+    
+    @ApiProperty({
+        example: ""
+    })
+    @IsNumberString()
+    @IsNotEmpty()
+    partnerPhone: string
+    
+    @ApiProperty({
+        example: ""
+    })
+    @IsString()
+    @IsNotEmpty()
+    partnerAddress: string
+    
+    @ApiProperty({
+        enum: Religion
+    })
+    @IsString()
+    @IsEnum(Religion)
+    @IsNotEmpty()
+    religion: Religion
 }

@@ -41,7 +41,7 @@ export class UserController {
     }
     const existUser = await this.userService.findOne(id)
     if (!existUser) {
-      throw new BadRequestException("User not found")
+      throw new NotFoundException("User not found")
     }
     return this.userService.update(id, updateUserDto);
   }
@@ -53,7 +53,7 @@ export class UserController {
     }
     const existUser = await this.userService.findOne(id)
     if (!existUser) {
-      throw new BadRequestException("User not found")
+      throw new NotFoundException("User not found")
     }
     return this.userService.softDelete(id);
   }
@@ -65,7 +65,7 @@ export class UserController {
     }
     const existUser = await this.userService.findOne(id)
     if (!existUser) {
-      throw new BadRequestException("User not found")
+      throw new NotFoundException("User not found")
     }
     return this.userService.restore(id);
   }
@@ -77,7 +77,7 @@ export class UserController {
     }
     const existUser = await this.userService.findOne(id)
     if (!existUser) {
-      throw new BadRequestException("User not found")
+      throw new NotFoundException("User not found")
     }
     return this.userService.remove(id);
   }

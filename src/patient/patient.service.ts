@@ -4,6 +4,7 @@ import { UpdatePatientDto } from './dto/update-patient.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { Patient } from './entities/patient.entity';
 import { Model } from 'mongoose';
+import { faker } from '@faker-js/faker';
 
 @Injectable()
 export class PatientService {
@@ -12,7 +13,8 @@ export class PatientService {
   ) {}
 
   async create(createPatientDto: CreatePatientDto) {
-    const newPatient = await this.patientModel.create(createPatientDto)
+    createPatientDto['medicalRecord'] = faker.string.numeric(10);
+    const newPatient = await this.patientModel.create(createPatientDto);
     return newPatient.save();
   }
 
@@ -20,15 +22,17 @@ export class PatientService {
     return this.patientModel.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} patient`;
+  async findOne(id: string) {
+    return await this.patientModel.findById(id);
   }
 
-  update(id: number, updatePatientDto: UpdatePatientDto) {
-    return `This action updates a #${id} patient`;
+  async update(id: string, updatePatientDto: UpdatePatientDto) {
+    const updatedPatient = await this.patientModel.findByIdAndUpdate(id, updatePatientDto, {new: true}).exec();
+    return updatedPatient;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} patient`;
+  async remove(id: string) {
+    await this.patientModel.findByIdAndDelete(id)
+    return `Delete patient data success`;
   }
 }

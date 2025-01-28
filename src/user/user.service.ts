@@ -52,6 +52,6 @@ export class UserService {
 
   async remove(id: string) {
     await this.userModel.findByIdAndDelete(id)
-    return 'Deleted user success';
+    return 'Delete user data success';
   }
 }

@@ -11,6 +11,12 @@ export type PatientDocument = HydratedDocument<Patient>
 
 export class Patient {
     @Prop({required: true})
+    medicalRecord: string;
+
+    @Prop({required: true})
+    nik: string;
+
+    @Prop({required: true})
     name: string;
 
     @Prop({
@@ -39,6 +45,11 @@ export class Patient {
         enum: PaymentMethod
     })
     paymentMethod: PaymentMethod
+
+    @Prop({
+        default: null
+    })
+    bpjs: string | null;
     
     @Prop({
         default: null

@@ -25,10 +25,10 @@ export enum PaymentMethod {
 }
 
 export enum Religion {
-    ISLAM,
-    KATOLIK,
-    PROTESTAN,
-    HINDU,
-    BUDHA,
-    KONGHUCHU
+    ISLAM = "Islam",
+    KATOLIK = "Katolik",
+    PROTESTAN = "Protestan",
+    HINDU = "Hindu",
+    BUDHA = "Budha",
+    KONGHUCHU = "Konghuchu"
 }
