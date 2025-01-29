@@ -5,7 +5,7 @@ import { AppDto1, AppDto2 } from './app.dto';
 @Injectable()
 export class AppService {
   constructor(
-    private readonly libService: LibService
+    private readonly libService: LibService,
   ) {}
 
   getHello(): string {

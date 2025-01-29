@@ -5,7 +5,7 @@ import { UpdatePatientDto } from './dto/update-patient.dto';
 import { PatientGateway } from './patient.gateway';
 import { ValidateMongodbIdPipe } from 'src/pipes/validate-mongodb-id/validate-mongodb-id.pipe';
 
-@Controller('patient')
+@Controller('patients')
 export class PatientController {
   constructor(
     private readonly patientService: PatientService,
