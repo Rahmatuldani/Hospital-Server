@@ -11,5 +11,6 @@ import { PatientGateway } from './patient.gateway';
   ],
   controllers: [PatientController],
   providers: [PatientService, PatientGateway],
+  exports: [PatientService]
 })
 export class PatientModule {}
